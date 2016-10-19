@@ -16,6 +16,7 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
+			/*
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
@@ -41,6 +42,11 @@ if (!is_null($events['events'])) {
 			curl_close($ch);
 
 			echo $result . "\r\n";
+			*/
+			
+			$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($access_token);
+			$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => $access_token]);
+			$response = $bot->replyText($replyToken, $text);
 		}
 	}
 }
